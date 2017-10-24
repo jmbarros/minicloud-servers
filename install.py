@@ -46,9 +46,9 @@ f.close()
 docker_run("-e LICENSE=accept  -v \"$(pwd)\":/data ibmcom/icp-inception:2.1.0-ee cp -r cluster /data")
 
 copy("~/.ssh/id_rsa", "~/cluster/ssh_key")
-copy("~/servers/hosts", "~/cluster/hosts")
-play_book("~/servers/hosts.yml", "~/inventory")
-play_book("~/servers/config_prereq.yml", "~/inventory")
+copy("~/minicloud-servers/hosts", "~/cluster/hosts")
+play_book("~/minicloud-servers/hosts.yml", "~/inventory")
+play_book("~/minicloud-servers/config_prereq.yml", "~/inventory")
 
 docker_run("-e LICENSE=accept --net=host  -t -v \"$(pwd)/cluster\":/installer/cluster ibmcom/icp-inception:2.1.0-ee install")
 
